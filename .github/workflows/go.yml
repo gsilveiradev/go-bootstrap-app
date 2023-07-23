@@ -1,0 +1,58 @@
+name: Build && Lint && Test
+
+on: [push]
+
+jobs:
+  
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup Go
+        uses: actions/setup-go@v4
+        with:
+          go-version-file: 'go.mod'
+      - name: Build
+        run: make build
+      - name: Clean
+        run: make clean
+  
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup Go
+        uses: actions/setup-go@v4
+        with:
+          go-version-file: 'go.mod'
+      - name: Get Tools
+        run: make tools
+      - name: Vet
+        run: make vet
+      - name: Lint
+        run: make lint
+      - name: Clean
+        run: make clean
+  
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup Go
+        uses: actions/setup-go@v4
+        with:
+          go-version-file: 'go.mod'
+      - name: Get Tools
+        run: make tools
+      - name: Test
+        run: make test
+      - name: Coverage
+        run: make coverage
+      - name: Upload Go test results
+        uses: actions/upload-artifact@v3
+        with:
+          name: Reports
+          path: reports/*
+      - name: Clean
+        run: make clean
+        
