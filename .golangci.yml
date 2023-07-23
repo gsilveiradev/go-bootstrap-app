@@ -1,0 +1,15 @@
+linters-settings:
+  lll:
+    line-length: 200
+linters:
+  disable-all: true
+  enable:
+    - unused
+    - errcheck
+    - gosimple
+    - lll
+    - staticcheck
+    #- revive
+    - govet
+run:
+  deadline: 5m

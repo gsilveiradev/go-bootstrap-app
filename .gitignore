@@ -19,3 +19,12 @@
 
 # Go workspace file
 go.work
+
+# Reports folder
+reports/
+
+# Go bin folder
+bin/
+
+# Go tools folder
+tools/
